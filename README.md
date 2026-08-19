@@ -1,25 +1,38 @@
-# Web Academy — Frontend
+# Web Academy
 
-A single self-contained `index.html` — React, Tailwind, and icon/chart
-libraries loaded from CDNs, with the entire app (all three roles: student,
-instructor, admin) written as one React component.
+A full-featured Learning Management System — student, instructor, and admin
+roles, courses, quizzes, assignments, certificates, and more.
 
-## Run it
+This repo has two independent parts:
 
-Just open `index.html` in a browser. No build step, no npm install. It needs
-an internet connection on first load (to fetch React/Tailwind/etc. from
-CDNs) but runs entirely client-side after that.
-
-You can also serve it locally instead of double-clicking the file (some
-browsers restrict local `file://` pages slightly more than served ones):
-
-```bash
-npx serve .
-# or
-python3 -m http.server 8000
+```
+web-academy/
+├── frontend/   — static React app (open index.html directly, or deploy anywhere static)
+└── backend/    — zero-dependency Node.js REST API + SQLite
 ```
 
-## Demo accounts
+## Status: not yet connected
+
+The frontend currently persists data in the browser's `localStorage`. The
+backend is a complete, tested REST API. **They don't talk to each other
+yet** — see `frontend/README.md` for details. Each has its own demo
+accounts and works standalone for now.
+
+## Quick start
+
+**Backend:**
+```bash
+cd backend
+node server.js          # requires Node.js 22.5+, zero npm install needed
+```
+
+**Frontend:**
+```bash
+cd frontend
+npx serve .              # or just open index.html directly in a browser
+```
+
+## Demo accounts (both frontend and backend, same credentials)
 
 | Role | Email | Password |
 |---|---|---|
@@ -27,25 +40,9 @@ python3 -m http.server 8000
 | Instructor | `instructor@webacademy.test` | `Instructor123!` |
 | Admin | `admin@webacademy.test` | `Admin123!` |
 
-## Current data layer: browser localStorage (not the backend yet)
+See `backend/README.md` for the full API reference and deployment notes,
+and `frontend/README.md` for frontend deployment notes.
 
-**Important:** this frontend does **not** currently call the `../backend`
-API. It persists everything in the browser's `localStorage`, which means:
+## License
 
-- Data is local to whichever browser/device opened the page — not shared
-  between users or devices
-- There is no real multi-user behavior yet (an instructor grading an
-  assignment on one device won't be seen by a student on another device)
-
-Wiring this frontend to call the real backend API instead is a separate,
-substantial task (replacing every local read/write with a `fetch()` call,
-adding a real token-based login flow, handling loading/error states for
-network requests). See the root README for status.
-
-## Deploying it
-
-Since it's a single static HTML file, you can host it almost anywhere for
-free:
-- **GitHub Pages**: enable Pages on this repo, pointed at `/frontend`
-- **Netlify / Vercel**: drag-and-drop deploy, or connect the repo
-- Any static file host works — there's no server-side rendering involved
+MIT
