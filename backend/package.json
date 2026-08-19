@@ -4,7 +4,12 @@
   "description": "Web Academy REST API — zero external dependencies, SQLite-backed.",
   "main": "server.js",
   "type": "commonjs",
-  "engines": { "node": ">=22.5.0" },
-  "scripts": { "start": "node server.js" },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --no-warnings server.js & sleep 1 && node test.mjs; kill %1"
+  },
   "license": "MIT"
 }
